@@ -1,0 +1,62 @@
+If you're using Rocky Linux 9 as your Docker host, the instructions I provided still apply, but you'll need to install Docker and Docker Compose on Rocky Linux first. Here’s how you can do that:
+
+### Step 1: Install Docker on Rocky Linux 9
+
+1. **Update your system**:
+   ```bash
+   sudo dnf update -y
+   ```
+
+2. **Install required packages**:
+   ```bash
+   sudo dnf install -y yum-utils
+   ```
+
+3. **Add Docker repository**:
+   ```bash
+   sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+   ```
+
+4. **Install Docker**:
+   ```bash
+   sudo dnf install -y docker-ce docker-ce-cli containerd.io
+   ```
+
+5. **Start and enable Docker**:
+   ```bash
+   sudo systemctl start docker
+   sudo systemctl enable docker
+   ```
+
+6. **Verify Docker is running**:
+   ```bash
+   sudo systemctl status docker
+   ```
+
+7. **Add your user to the `docker` group** (optional, for non-root access):
+   ```bash
+   sudo usermod -aG docker $USER
+   ```
+
+8. **Logout and login again** to apply the group changes, or use `newgrp docker`.
+
+### Step 2: Install Docker Compose
+
+1. **Download Docker Compose**:
+   ```bash
+   sudo curl -L "https://github.com/docker/compose/releases/download/v2.21.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+   ```
+
+2. **Set the correct permissions**:
+   ```bash
+   sudo chmod +x /usr/local/bin/docker-compose
+   ```
+
+3. **Verify the installation**:
+   ```bash
+   docker-compose --version
+   ```
+
+### Step 3: Proceed with the Docker Compose Setup
+
+
